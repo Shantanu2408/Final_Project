@@ -1,0 +1,9 @@
+Cart_Detail Table Creation..........
+columns=>
+Cart_No. PK will be generated Automatically,
+Product_Id Foreign key taken references from Products Table,
+Product_Name, Brand, Total_Price
+
+How we will write code in frontend for this..
+1- Order function
+2- 
