@@ -10,11 +10,12 @@ namespace E_Trading_System.Controllers.Vendor
 {
     public class VendorLoginController : Controller
     {
-        private readonly E_Trading_SystemDBEntities3 db; 
+        public decimal vendor_id;
+        private readonly E_Trading_SystemDBEntities4 db; 
 
         public VendorLoginController()
         {
-            db = new E_Trading_SystemDBEntities3(); 
+            db = new E_Trading_SystemDBEntities4(); 
         }
        
         public ActionResult Login()
@@ -28,7 +29,8 @@ namespace E_Trading_System.Controllers.Vendor
             
             if (IsValidVendor(email, password))
             {
-                return RedirectToAction("Index", "Products");
+                vendor_id = db.Vendors.Where(v => v.Vendor_Email == email).Select(v => v.Vendor_Id).FirstOrDefault();
+                return RedirectToAction("Index/"+vendor_id, "Products");
             }
             else
             {

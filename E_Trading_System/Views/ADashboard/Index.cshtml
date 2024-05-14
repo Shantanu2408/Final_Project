@@ -1,0 +1,215 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        h2 {
+            color: black;
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        p {
+            text-align: center;
+            color: darkgray
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: darkslategray;
+           
+        }
+
+        #box {
+            width: 300px;
+            height: 250px;
+            color: #fff;
+            background: #262626;
+            position: relative;
+            margin-top: 180px;
+            margin-bottom:40px;
+            margin-left: 300px;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+            #box::after,
+            #box::before {
+                content: "";
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
+                background-size: 400%;
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                z-index: -1;
+                animation: animated-shadow 10s linear infinite alternate;
+                border-radius: 10px;
+            }
+
+            #box::after {
+                filter: blur(30px);
+                border-radius: 10px;
+            }
+
+        @@keyframes animated-shadow {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+
+
+        #box2 {
+            width: 300px;
+            height: 250px;
+            color: #fff;
+            background: #262626;
+            position: relative;
+            margin-top: -290px;
+            margin-left: 660px;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+            #box2::after,
+            #box2::before {
+                content: "";
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
+                background-size: 400%;
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                z-index: -1;
+                animation: an-shadow 10s linear infinite alternate;
+                border-radius: 10px;
+            }
+
+            #box2::after {
+                filter: blur(30px);
+                border-radius: 10px;
+            }
+
+        @@keyframes an-shadow {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        #id1 {
+            margin-top: 5px;
+            margin-left: 2px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .VBT {
+            background-color: cadetblue;
+            text-decoration: none;
+            color: black;
+            background-color: antiquewhite;
+            border-radius: 3px;
+            border: 2px solid grey;
+            text-align: center;
+            padding: 6px;
+            margin-left: 30px;
+        }
+
+        .b {
+            /*text-align:center;*/
+            margin-left: 34px;
+        }
+
+        .VBT:hover {
+            background-color: antiquewhite;
+            text-decoration: none;
+        }
+
+        .CBT {
+           
+            text-decoration: none;
+            color: black;
+            background-color: antiquewhite;
+            border-radius: 3px;
+            border: 2px solid grey;
+            text-align: center;
+            margin-left: 40px;
+            padding: 6px;
+        }
+
+            .CBT:hover {
+                background-color: antiquewhite;
+                
+                text-decoration:none;
+            }
+        #box .b1
+        {
+            margin-top:5px;
+            margin-left:29px;
+        }
+        #box .b {
+            margin-top: 100px;
+            
+        }
+
+            .b1 {
+                margin-left: 30px;
+            }
+    </style>
+</head>
+<body>
+    <h2>Welcome to Admin Dashboard</h2>
+    <p>You can manage Customer, Vendors, and Product Categories from this dashboard.</p>
+
+    <div id="box">
+        <h3>CUSTOMER</h3><br />
+        <p id="tg1">Manage Customers, Delete, view</p>
+        <p>Details</p>
+        <div class="b1">
+            <a href="@Url.Action("Index", "ACustomer")" class="CBT">CLICK HERE</a>
+        </div>
+    </div>
+
+    <div id="box2">
+        <h3>VENDOR</h3><br />
+        <p id="tg2">Manage Vendors, Delete, view</p>
+        <p>Details</p>
+        <div class="b">
+            <a href="@Url.Action("Index", "AVendor")" class="VBT">CLICK HERE</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -89,6 +89,21 @@ warning 6002: The table/view 'E_Trading_SystemDB.dbo.BucketList' does not have a
           <Property Name="Stock" Type="int" />
           <Property Name="Price" Type="float" />
           <Property Name="Status" Type="varchar" MaxLength="25" />
+          <Property Name="Color" Type="varchar" MaxLength="20" />
+          <Property Name="imageURL" Type="nvarchar" MaxLength="400" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'E_Trading_SystemDB.dbo.Query' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="Complain_No" />
+          </Key>
+          <Property Name="Complain_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="60" />
+          <Property Name="Phone_Number" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" />
+          <Property Name="Query" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Vendors">
           <Key>
@@ -106,13 +121,16 @@ warning 6002: The table/view 'E_Trading_SystemDB.dbo.BucketList' does not have a
           <Property Name="Passowrd" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'E_Trading_SystemDB.dbo.Wallet' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="wallet_Id" />
+          </Key>
+          <Property Name="wallet_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Customer_Id" Type="numeric" Precision="10" Scale="0" />
-          <Property Name="Remaining_Amount" Type="float" />
-          <Property Name="Last_Top_Up_Amount" Type="float" />
-        </EntityType>-->
+          <Property Name="Date_of_Top_Up" Type="date" />
+          <Property Name="Last_Top_Up" Type="float" />
+          <Property Name="Total_Top_Up" Type="float" />
+        </EntityType>
         <Association Name="FK__Admin__Hint_Id__3A81B327">
           <End Role="Hints" Type="Self.Hints" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
@@ -221,9 +239,18 @@ warning 6013: The table/view 'E_Trading_SystemDB.dbo.Wallet' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__Wallet__Customer__412EB0B6" />-->
+        <Association Name="FK__Wallet__Customer__5CD6CB2B">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="E_Trading_SystemDBModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -233,12 +260,23 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BucketList" EntityType="Self.BucketList" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [BucketList].[Serial_Number] AS [Serial_Number], 
     [BucketList].[Product_Id] AS [Product_Id], 
     [BucketList].[Customer_Id] AS [Customer_Id]
     FROM [dbo].[BucketList] AS [BucketList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Query" EntityType="Self.Query" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Query].[Complain_No] AS [Complain_No], 
+    [Query].[Name] AS [Name], 
+    [Query].[Email] AS [Email], 
+    [Query].[Phone_Number] AS [Phone_Number], 
+    [Query].[Subject] AS [Subject], 
+    [Query].[Query] AS [Query]
+    FROM [dbo].[Query] AS [Query]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Admin__Hint_Id__3A81B327" Association="Self.FK__Admin__Hint_Id__3A81B327">
             <End Role="Hints" EntitySet="Hints" />
@@ -276,6 +314,10 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
             <End Role="Hints" EntitySet="Hints" />
             <End Role="Vendors" EntitySet="Vendors" />
           </AssociationSet>
+          <AssociationSet Name="FK__Wallet__Customer__5CD6CB2B" Association="Self.FK__Wallet__Customer__5CD6CB2B">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -311,6 +353,7 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <NavigationProperty Name="BucketLists" Relationship="Self.FK__BucketLis__Custo__534D60F1" FromRole="Customer" ToRole="BucketList" />
           <NavigationProperty Name="Hint" Relationship="Self.FK__Customer__Hint_I__3F466844" FromRole="Customer" ToRole="Hints" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__47DBAE45" FromRole="Customer" ToRole="Orders" />
+          <NavigationProperty Name="Wallets" Relationship="Self.FK__Wallet__Customer__5CD6CB2B" FromRole="Customer" ToRole="Wallet" />
         </EntityType>
         <EntityType Name="Hint">
           <Key>
@@ -368,6 +411,8 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <Property Name="Stock" Type="Int32" />
           <Property Name="Price" Type="Double" />
           <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="imageURL" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BucketLists" Relationship="Self.FK__BucketLis__Produ__52593CB8" FromRole="Products" ToRole="BucketList" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK__Products__Vendor__4D94879B" FromRole="Products" ToRole="Vendors" />
         </EntityType>
@@ -389,6 +434,17 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <NavigationProperty Name="Hint" Relationship="Self.FK__Vendors__Hint_Id__44FF419A" FromRole="Vendors" ToRole="Hints" />
           <NavigationProperty Name="Products" Relationship="Self.FK__Products__Vendor__4D94879B" FromRole="Vendors" ToRole="Products" />
         </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="wallet_Id" />
+          </Key>
+          <Property Name="wallet_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Id" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Date_of_Top_Up" Type="DateTime" Precision="0" />
+          <Property Name="Last_Top_Up" Type="Double" />
+          <Property Name="Total_Top_Up" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Wallet__Customer__5CD6CB2B" FromRole="Wallet" ToRole="Customer" />
+        </EntityType>
         <EntityType Name="BucketList">
           <Key>
             <PropertyRef Name="Serial_Number" />
@@ -398,6 +454,17 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <Property Name="Customer_Id" Type="Decimal" Precision="10" Scale="0" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__BucketLis__Custo__534D60F1" FromRole="BucketList" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="Self.FK__BucketLis__Produ__52593CB8" FromRole="BucketList" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="Complain_No" />
+          </Key>
+          <Property Name="Complain_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Number" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Query1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Admin__Hint_Id__3A81B327">
           <End Role="Hints" Type="Self.Hint" Multiplicity="0..1" />
@@ -443,6 +510,18 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
               <PropertyRef Name="Customer_Id" />
             </Principal>
             <Dependent Role="Orders">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wallet__Customer__5CD6CB2B">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Wallet">
               <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -507,7 +586,7 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="E_Trading_SystemDBEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="E_Trading_SystemDBEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Hints" EntityType="Self.Hint" />
@@ -516,7 +595,9 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <EntitySet Name="Wallets" EntityType="Self.Wallet" />
           <EntitySet Name="BucketLists" EntityType="Self.BucketList" />
+          <EntitySet Name="Queries" EntityType="Self.Query" />
           <AssociationSet Name="FK__Admin__Hint_Id__3A81B327" Association="Self.FK__Admin__Hint_Id__3A81B327">
             <End Role="Hints" EntitySet="Hints" />
             <End Role="Admin" EntitySet="Admins" />
@@ -532,6 +613,10 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
           <AssociationSet Name="FK__Orders__Customer__47DBAE45" Association="Self.FK__Orders__Customer__47DBAE45">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wallet__Customer__5CD6CB2B" Association="Self.FK__Wallet__Customer__5CD6CB2B">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Wallet" EntitySet="Wallets" />
           </AssociationSet>
           <AssociationSet Name="FK__Vendors__Hint_Id__44FF419A" Association="Self.FK__Vendors__Hint_Id__44FF419A">
             <End Role="Hints" EntitySet="Hints" />
@@ -559,7 +644,7 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="E_Trading_SystemDBModelStoreContainer" CdmEntityContainer="E_Trading_SystemDBEntities3">
+        <EntityContainerMapping StorageEntityContainer="E_Trading_SystemDBModelStoreContainer" CdmEntityContainer="E_Trading_SystemDBEntities4">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -639,6 +724,8 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
                 <ScalarProperty Name="Stock" ColumnName="Stock" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="imageURL" ColumnName="imageURL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -659,12 +746,35 @@ error 6004: The table 'E_Trading_SystemDB.dbo.Wallet' is referenced by a relatio
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Wallets">
+            <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Wallet">
+              <MappingFragment StoreEntitySet="Wallet">
+                <ScalarProperty Name="wallet_Id" ColumnName="wallet_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Date_of_Top_Up" ColumnName="Date_of_Top_Up" />
+                <ScalarProperty Name="Last_Top_Up" ColumnName="Last_Top_Up" />
+                <ScalarProperty Name="Total_Top_Up" ColumnName="Total_Top_Up" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BucketLists">
             <EntityTypeMapping TypeName="E_Trading_SystemDBModel.BucketList">
               <MappingFragment StoreEntitySet="BucketList">
                 <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Queries">
+            <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Query">
+              <MappingFragment StoreEntitySet="Query">
+                <ScalarProperty Name="Complain_No" ColumnName="Complain_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Query1" ColumnName="Query" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

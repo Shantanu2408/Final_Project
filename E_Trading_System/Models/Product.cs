@@ -27,6 +27,8 @@ namespace E_Trading_System.Models
         public Nullable<int> Stock { get; set; }
         public Nullable<double> Price { get; set; }
         public string Status { get; set; }
+        public string Color { get; set; }
+        public string imageURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BucketList> BucketLists { get; set; }

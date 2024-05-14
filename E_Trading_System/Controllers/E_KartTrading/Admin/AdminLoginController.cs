@@ -15,10 +15,10 @@ namespace E_Trading_System.Controllers.Admin
             return View();
         }
 
-        private readonly E_Trading_SystemDBEntities3 ES; 
+        private readonly E_Trading_SystemDBEntities4 ES; 
         public AdminLoginController()
         {
-            ES = new E_Trading_SystemDBEntities3(); 
+            ES = new E_Trading_SystemDBEntities4(); 
         }
        
         public ActionResult Login()
@@ -32,7 +32,7 @@ namespace E_Trading_System.Controllers.Admin
             
             if (IsValidAdmin(email, password))
             {
-                return RedirectToAction("Index", "ACustomer");
+                return RedirectToAction("Index", "ADashboard");
             }
             else
             {

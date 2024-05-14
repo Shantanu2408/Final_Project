@@ -1,0 +1,87 @@
+﻿@model IEnumerable<E_Trading_System.Models.Vendor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor_Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hint_Answers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Passowrd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hint.Questions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendor_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendor_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile_Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendor_Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hint_Answers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passowrd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hint.Questions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Vendor_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Vendor_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Vendor_Id })
+        </td>
+    </tr>
+}
+
+</table>

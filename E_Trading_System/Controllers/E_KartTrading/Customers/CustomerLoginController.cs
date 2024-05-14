@@ -10,17 +10,18 @@ namespace E_Trading_System.Controllers.E_KartTrading.Customers
         public class CustomerLoginController : Controller
         {
             // GET: Customer
+            public decimal Cust_Id;
             public ActionResult Login()
             {
                 return View();
             }
 
 
-            private readonly E_Trading_SystemDBEntities3 db;
+            private readonly E_Trading_SystemDBEntities4 db;
 
             public CustomerLoginController()
             {
-                db = new E_Trading_SystemDBEntities3();
+                db = new E_Trading_SystemDBEntities4();
             }
            
             [HttpPost]
@@ -29,6 +30,7 @@ namespace E_Trading_System.Controllers.E_KartTrading.Customers
 
                 if (IsValidCustomer(email, password))
                 {
+                     Cust_Id = db.Customers.Where(c => c.Customer_Email == email).Select(c => c.Customer_Id).FirstOrDefault();
                     return RedirectToAction("Index", "Home");
                 }
                 else

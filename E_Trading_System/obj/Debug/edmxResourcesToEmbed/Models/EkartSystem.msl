@@ -70,19 +70,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Product">
-        <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-          <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
-          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
-          <ScalarProperty Name="Stock" ColumnName="Stock" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Vendors">
       <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Vendor">
         <MappingFragment StoreEntitySet="Vendors">
@@ -106,6 +93,44 @@
           <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
           <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
           <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wallets">
+      <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Wallet">
+        <MappingFragment StoreEntitySet="Wallet">
+          <ScalarProperty Name="Total_Top_Up" ColumnName="Total_Top_Up" />
+          <ScalarProperty Name="Last_Top_Up" ColumnName="Last_Top_Up" />
+          <ScalarProperty Name="Date_of_Top_Up" ColumnName="Date_of_Top_Up" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="wallet_Id" ColumnName="wallet_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Queries">
+      <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Query">
+        <MappingFragment StoreEntitySet="Query">
+          <ScalarProperty Name="Query1" ColumnName="Query" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Complain_No" ColumnName="Complain_No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product1">
+      <EntityTypeMapping TypeName="E_Trading_SystemDBModel.Product1">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="imageURL" ColumnName="imageURL" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+          <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

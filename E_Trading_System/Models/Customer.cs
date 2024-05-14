@@ -19,6 +19,7 @@ namespace E_Trading_System.Models
         {
             this.BucketLists = new HashSet<BucketList>();
             this.Orders = new HashSet<Order>();
+            this.Wallets = new HashSet<Wallet>();
         }
     
         public decimal Customer_Id { get; set; }
@@ -37,5 +38,7 @@ namespace E_Trading_System.Models
         public virtual Hint Hint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wallet> Wallets { get; set; }
     }
 }

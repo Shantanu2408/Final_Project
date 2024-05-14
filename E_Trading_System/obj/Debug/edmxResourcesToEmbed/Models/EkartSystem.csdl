@@ -29,6 +29,7 @@
     <NavigationProperty Name="BucketLists" Relationship="Self.FK__BucketLis__Custo__534D60F1" FromRole="Customer" ToRole="BucketList" />
     <NavigationProperty Name="Hint" Relationship="Self.FK__Customer__Hint_I__3F466844" FromRole="Customer" ToRole="Hints" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__47DBAE45" FromRole="Customer" ToRole="Orders" />
+    <NavigationProperty Name="Wallets" Relationship="E_Trading_SystemDBModel.FK__Wallet__Customer__5CD6CB2B" FromRole="Customer" ToRole="Wallet" />
   </EntityType>
   <EntityType Name="Hint">
     <Key>
@@ -88,6 +89,9 @@
     <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="BucketLists" Relationship="Self.FK__BucketLis__Produ__52593CB8" FromRole="Products" ToRole="BucketList" />
     <NavigationProperty Name="Vendor" Relationship="Self.FK__Products__Vendor__4D94879B" FromRole="Products" ToRole="Vendors" />
+    <Property Name="imageurl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="imageURL" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Vendor">
     <Key>
@@ -106,6 +110,7 @@
     <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Hint" Relationship="Self.FK__Vendors__Hint_Id__44FF419A" FromRole="Vendors" ToRole="Hints" />
     <NavigationProperty Name="Products" Relationship="Self.FK__Products__Vendor__4D94879B" FromRole="Vendors" ToRole="Products" />
+    <NavigationProperty Name="Products1" Relationship="E_Trading_SystemDBModel.FK__Products__Vendor__4D94879B1" FromRole="Vendor" ToRole="Product1" />
   </EntityType>
   <EntityType Name="BucketList">
     <Key>
@@ -116,6 +121,7 @@
     <Property Name="Customer_Id" Type="Decimal" Precision="10" Scale="0" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__BucketLis__Custo__534D60F1" FromRole="BucketList" ToRole="Customer" />
     <NavigationProperty Name="Product" Relationship="Self.FK__BucketLis__Produ__52593CB8" FromRole="BucketList" ToRole="Products" />
+    <NavigationProperty Name="Product1" Relationship="E_Trading_SystemDBModel.FK__BucketLis__Produ__52593CB81" FromRole="BucketList" ToRole="Product1" />
   </EntityType>
   <Association Name="FK__Admin__Hint_Id__3A81B327">
     <End Role="Hints" Type="Self.Hint" Multiplicity="0..1" />
@@ -271,5 +277,94 @@
       <End Role="Vendors" EntitySet="Vendors" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="Wallets" EntityType="E_Trading_SystemDBModel.Wallet" />
+    <AssociationSet Name="FK__Wallet__Customer__5CD6CB2B" Association="E_Trading_SystemDBModel.FK__Wallet__Customer__5CD6CB2B">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Wallet" EntitySet="Wallets" />
+    </AssociationSet>
+    <EntitySet Name="Queries" EntityType="E_Trading_SystemDBModel.Query" />
+    <EntitySet Name="Product1" EntityType="E_Trading_SystemDBModel.Product1" />
+    <AssociationSet Name="FK__BucketLis__Produ__52593CB81" Association="E_Trading_SystemDBModel.FK__BucketLis__Produ__52593CB81">
+      <End Role="Product1" EntitySet="Product1" />
+      <End Role="BucketList" EntitySet="BucketLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Vendor__4D94879B1" Association="E_Trading_SystemDBModel.FK__Products__Vendor__4D94879B1">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Product1" EntitySet="Product1" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="wallet_Id" />
+    </Key>
+    <Property Name="wallet_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_Id" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Date_of_Top_Up" Type="DateTime" Precision="0" />
+    <Property Name="Last_Top_Up" Type="Double" />
+    <Property Name="Total_Top_Up" Type="Double" />
+    <NavigationProperty Name="Customer" Relationship="E_Trading_SystemDBModel.FK__Wallet__Customer__5CD6CB2B" FromRole="Wallet" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK__Wallet__Customer__5CD6CB2B">
+    <End Type="E_Trading_SystemDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="E_Trading_SystemDBModel.Wallet" Role="Wallet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_Id" />
+      </Principal>
+      <Dependent Role="Wallet">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Query">
+    <Key>
+      <PropertyRef Name="Complain_No" />
+    </Key>
+    <Property Name="Complain_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Phone_Number" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Query1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Product1">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
+    <Property Name="Vendor_Id" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Product_Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Brand" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="imageURL" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BucketLists" Relationship="E_Trading_SystemDBModel.FK__BucketLis__Produ__52593CB81" FromRole="Product1" ToRole="BucketList" />
+    <NavigationProperty Name="Vendor" Relationship="E_Trading_SystemDBModel.FK__Products__Vendor__4D94879B1" FromRole="Product1" ToRole="Vendor" />
+  </EntityType>
+  <Association Name="FK__BucketLis__Produ__52593CB81">
+    <End Type="E_Trading_SystemDBModel.Product1" Role="Product1" Multiplicity="0..1" />
+    <End Type="E_Trading_SystemDBModel.BucketList" Role="BucketList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product1">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="BucketList">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Vendor__4D94879B1">
+    <End Type="E_Trading_SystemDBModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+    <End Type="E_Trading_SystemDBModel.Product1" Role="Product1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Vendor_Id" />
+      </Principal>
+      <Dependent Role="Product1">
+        <PropertyRef Name="Vendor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

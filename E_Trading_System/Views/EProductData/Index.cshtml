@@ -1,0 +1,232 @@
+﻿@model List<E_Trading_System.Models.Product>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product Listing</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <style>
+            .containerC {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+            }
+
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+                nav ul li {
+                    display: inline;
+                    margin-right: 20px;
+                    text-decoration: none;
+                }
+
+                    nav ul li a {
+                        text-decoration: none;
+                        color: black;
+                        text-decoration: none;
+                    }
+
+            .search-bar {
+                display: flex;
+            }
+
+                .search-bar input[type="text"] {
+                    padding: 8px;
+                    width: 300px;
+                    border: 1px solid black;
+                    border-radius: 5px;
+                }
+
+                .search-bar button {
+                    padding: 8px 20px;
+                    background-color: cadetblue;
+                    color: black;
+                    border: 2px solid black;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+            .ProductType ul li {
+                display: inline;
+            }
+
+                .ProductType ul li a {
+                    display: inline-block;
+                    padding: 20px 20px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: black;
+                    transition: color 0.3s ease;
+                }
+
+                    .ProductType ul li a:hover {
+                        color: skyblue;
+                    }
+
+
+
+
+
+
+
+
+
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: darkslategray;
+                margin: 0;
+                padding: 0;
+                margin-top: 40px;
+            }
+
+            .containerA {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                height: 60px;
+            }
+
+            .product {
+                background-color: #424242;
+                / border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darker box shadow */
+                margin: 15px;
+                padding: 20px;
+                width: 250px;
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+
+                .product:hover {
+                    transform: translateY(-5px);
+                }
+
+                .product img {
+                    width: 100%;
+                    border-radius: 8px;
+                    margin-bottom: 15px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darker box shadow */
+                }
+
+                .product h3 {
+                    font-size: 1.2em;
+                    margin-bottom: 10px;
+                    color: #fff; /* White text color */
+                }
+
+                .product p {
+                    margin: 5px 0;
+                    color: #ccc; /* Light gray text color */
+                }
+
+                .product button {
+                    background-color: #009688; /* Dark turquoise button color */
+                    color: #fff;
+                    border: none;
+                    border-radius: 3px;
+                    padding: 8px 20px;
+                    font-size: 0.9em;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    margin-top: 10px;
+                }
+
+                    .product button:hover {
+                        background-color: #00796b; /* Darker turquoise on hover */
+                    }
+
+            @@media (max-width: 768px) {
+                .product {
+                    width: calc(50% - 30px);
+                }
+            }
+
+            @@media (max-width: 576px) {
+                .product {
+                    width: calc(100% - 30px);
+                }
+            }
+
+            .Img1 {
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="containerC">
+            <header>
+
+                <nav class="ProductType">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "ProductData")">Grocerry</a></li>
+                        <li><a href="@Url.Action("Index", "EProductData")">Electronics</a></li>
+                        <li><a href="@Url.Action("Index", "MTProductData")">Mobiles & Tablets</a></li>
+                        <li><a href="@Url.Action("Index", "FProductData")">Fashion</a></li>
+
+                    </ul>
+                </nav>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search Product Name">
+                    <button type="submit">Search</button>
+                </div>
+            </header>
+
+
+
+            <div class="containerA">
+                @foreach (var product in Model)
+                {
+                    if (product.Vendor_Id == 3 || product.Vendor_Id == 4)
+                    {
+                        <div class="product">
+                            <img class="Img1" src="@product.imageURL" alt="@product.Product_Name">
+                            <h3>@product.Product_Name</h3>
+                            <p>@product.Brand</p>
+                            <p>$@product.Price</p>
+                            <p>Color: @product.Color</p>
+                            <button><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                            <button onclick="searchProducts"><i class="fas fa-shopping-bag"></i> Buy Now</button>
+                        </div>
+                    }
+                }
+            </div>
+
+            <script>
+            function searchProducts() {
+        var input, filter, products, product, productName, brand, color, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        products = document.getElementsByClassName("product");
+
+        for (i = 0; i < products.length; i++) {
+            product = products[i];
+            productName = product.getElementsByTagName("h3")[0];
+            brand = product.getElementsByTagName("p")[0];
+            color = product.getElementsByTagName("p")[2];
+            txtValue = productName.textContent || productName.innerText;
+            brandText = brand.textContent || brand.innerText;
+            colorText = color.textContent || color.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1 || brandText.toUpperCase().indexOf(filter) > -1 || colorText.toUpperCase().indexOf(filter) > -1) {
+                product.style.display = "";
+            } else {
+                product.style.display = "none";
+            }
+        }
+    }
+            </script>
+
+</body>
+</html>

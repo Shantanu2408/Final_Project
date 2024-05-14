@@ -2,16 +2,47 @@
     ViewBag.Title = "Home";
 }
 
-@{
-    ViewBag.Title = "Home";
-}
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Ekart - Online Shopping Site</title>
     <link rel="stylesheet" type="text/css" href="~/Content/styles.css">
     <style>
+        .logo h2 {
+            width: 250px;
+            height: auto;
+            margin-top: 50px;
+            position: relative;
+            font-size: 3em;
+            letter-spacing: 8px;
+            color: #0e3742;
+            text-transform: uppercase;
+
+            -webkit-box-reflect: below 1px linear-gradient(transparent,#0008);
+            line-height: 0.70em;
+            outline: none;
+            animation: animate 5s linear infinite;
+        }
+        @@keyframes animate
+        {
+            0%,18%,20%,50.1%,65.1%,80%,90.1%,92%
+            {
+                color: #0e3742;
+               text-shadow: none;
+            }
+            18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%
+            {
+                color:#fff;
+                text-shadow:0 0 10px #03bcf4,
+                0 0 20px #03bcf4,
+                0 0 40px #03bcf4,
+                0 0 80px #03bcf4,
+                0 0 160px #03bcf4,
+                0 0 200px #03bcf4;
+
+
+            }
+        }
         .ProductType {
             margin: 0;
             padding: 0;
@@ -19,13 +50,14 @@
 
             .ProductType ul {
                 list-style: none;
-                margin-top: 70px; 
+                margin-top: 70px;
                 padding: 0;
             }
 
                 .ProductType ul li {
                     display: inline;
-                    
+
+
                 }
 
                     .ProductType ul li a {
@@ -42,27 +74,32 @@
                         }
 
         /* Adjusted Logo Style */
-        .logo img {
+        /*.logo img {
             width: 100px;
             height: auto;
-            margin-top: 70px ; /* Adjusted to use the logo's margin */
-        }
+            margin-top: 70px ;*/ /* Adjusted to use the logo's margin */
+        /*}*/
 
 
-      
+
 
         .banner img{
 
-            height:300px;
+            height:250px;
+            margin-top:30px;
+            border-radius:40px;
+            display:flex;
         }
+
         body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color:darkslategray;
+    height:300px;
 }
 
-.container {
+.containerA {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -98,18 +135,19 @@ nav ul li a {
 .search-bar input[type="text"] {
     padding: 8px;
     width: 300px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
+
 }
 
-.search-bar button {
-    padding: 8px 20px;
-    background-color: #ff6600;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .search-bar button {
+            padding: 8px 20px;
+            background-color: cadetblue;
+            color: black;
+            border: 2px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
 section.banner img {
     width: 100%;
@@ -127,20 +165,20 @@ section.products h2 {
 
 /* Footer Styles */
 footer {
-    margin-top: 50px;
+    margin-top: 260px;
     text-align: center;
     padding: 20px 0;
     background-color: #333;
     color: #fff;
 }
 
-/* Responsive Styles */
+/* Responsive Styles */-->
 @*@media screen and (max-width: 768px) {
     .container {
         padding: 10px;
     }*@
 
-    nav ul li {
+<!--nav ul li {
         display: block;
         margin: 10px 0;
     }
@@ -158,34 +196,100 @@ footer {
     .search-bar button {
         width: 100%;
     }
+button:hover
+{
+    background-color:lightslategray;
 }
 
+
+
+
+
+    /* Styling for custom alert */
+    .custom-alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border: 2px solid #f00;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        animation: fadeOut 3s ease forwards;
+    }
+
+    /* Keyframe animation for fading out */
+    @@keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
     </style>
+
+
+    
 </head>
 <body>
-    <div class="container">
+
+
+
+    <script>
+    function search() {
+        var searchInput = document.getElementById("SearchInput").value.toLowerCase();
+        switch (searchInput) {
+            case "grocerry":
+                window.location.href = "@Url.Action("Index", "ProductData")";
+                break;
+            case "electronics":
+                window.location.href = "@Url.Action("Index", "EProductData")";
+                break;
+            case "mobiles & tablets":
+                window.location.href = "@Url.Action("Index", "MTProductData")";
+                break;
+            case "fashion":
+                window.location.href = "@Url.Action("Index", "FProductData")";
+                break;
+            default:
+                // Customizing alert box
+                var alertBox = document.createElement("div");
+                alertBox.setAttribute("class", "custom-alert");
+                alertBox.innerHTML = "Category not found!";
+                document.body.appendChild(alertBox);
+                // Remove the alert box after a delay
+                setTimeout(function() {
+                    document.body.removeChild(alertBox);
+                }, 3000);
+                break;
+        }
+    }
+    </script>
+
+
+
+
+
+    <div class="containerA">
         <header>
             <div class="logo">
-                <img src="~/images/LOGO_EKart1.jpg" alt="Ekart_Trading Logo">
+                <h2>EXOKART</h2>
             </div>
             <nav class="ProductType">
                 <ul>
-                    <li><a href="#">Grocerry</a></li>
-                    <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Mobiles & Tablets</a></li>
-                    <li><a href="#">Fashion</a></li>
-                   
+                    <li><a href="@Url.Action("Index", "ProductData")" id="Grocerry">Grocerry</a></li>
+                    <li><a href="@Url.Action("Index", "EProductData")" id="Electronics">Electronics</a></li>
+                    <li><a href="@Url.Action("Index", "MTProductData")" id="Mobiles & Tablets">Mobiles & Tablets</a></li>
+                    <li><a href="@Url.Action("Index", "FProductData")" id="Fashion">Fashion</a></li>
                 </ul>
             </nav>
             <div class="search-bar">
-                <input type="text" placeholder="Search for product Category">
-                <button type="submit">Search</button>
+                <input type="text" id="SearchInput" placeholder="Search for product Category">
+                <button type="button" onclick="search()">Search</button>
             </div>
         </header>
-
-        <section class="banner">
-            <img src="~/images/Banner_EKart1.jpg" alt="Banner Image">
-        </section>
+        @*<section class="banner">
+                <img src="~/images/Dark_GoldB.png" alt="Banner Image">
+            </section>*@
 
         <section class="products">
         </section>
@@ -199,3 +303,14 @@ footer {
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

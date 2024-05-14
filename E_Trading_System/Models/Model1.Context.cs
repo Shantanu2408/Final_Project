@@ -13,10 +13,10 @@ namespace E_Trading_System.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class E_Trading_SystemDBEntities3 : DbContext
+    public partial class E_Trading_SystemDBEntities4 : DbContext
     {
-        public E_Trading_SystemDBEntities3()
-            : base("name=E_Trading_SystemDBEntities3")
+        public E_Trading_SystemDBEntities4()
+            : base("name=E_Trading_SystemDBEntities4")
         {
         }
     
@@ -33,6 +33,8 @@ namespace E_Trading_System.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Wallet> Wallets { get; set; }
         public virtual DbSet<BucketList> BucketLists { get; set; }
+        public virtual DbSet<Query> Queries { get; set; }
     }
 }

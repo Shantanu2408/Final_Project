@@ -12,11 +12,11 @@ namespace E_Trading_System.Controllers.E_KartTrading.Vendor
 {
     public class ProductsController : Controller
     {
-        private E_Trading_SystemDBEntities3 db = new E_Trading_SystemDBEntities3();
+        private E_Trading_SystemDBEntities4 db = new E_Trading_SystemDBEntities4();
 
-        public ActionResult Index()
+        public ActionResult Index(decimal? id)
         {
-            var products = db.Products.Include(p => p.Vendor);
+            var products = db.Products.Where(v => v.Vendor_Id == id);
             return View(products.ToList());
         }
 
@@ -42,7 +42,7 @@ namespace E_Trading_System.Controllers.E_KartTrading.Vendor
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Product_Id,Vendor_Id,Product_Name,Brand,Color,Price,Available_Stock,Status,ImageFileName,isdeleted")] Product product)
+        public ActionResult Create([Bind(Include = "Product_Id,Vendor_Id,Product_Name,Brand,Color,Price,Available_Stock,Status,imageurl,isdeleted")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace E_Trading_System.Controllers.E_KartTrading.Vendor
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Product_Id,Vendor_Id,Product_Name,Brand,Color,Price,Available_Stock,Status,ImageFileName,isdeleted")] Product product)
+        public ActionResult Edit([Bind(Include = "Product_Id,Vendor_Id,Product_Name,Brand,Color,Price,Available_Stock,Status,imageurl,isdeleted")] Product product)
         {
             if (ModelState.IsValid)
             {

@@ -1,3 +1,4 @@
+D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.csproj.CoreCompileInputs.cache
 D:\Final_Project\E_Trading_System\bin\E_Trading_System.dll.config
 D:\Final_Project\E_Trading_System\bin\E_Trading_System.dll
 D:\Final_Project\E_Trading_System\bin\E_Trading_System.pdb
@@ -56,6 +57,7 @@ D:\Final_Project\E_Trading_System\bin\EntityFramework.SqlServer.dll
 D:\Final_Project\E_Trading_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Final_Project\E_Trading_System\bin\Microsoft.Web.Infrastructure.dll
 D:\Final_Project\E_Trading_System\bin\Newtonsoft.Json.dll
+D:\Final_Project\E_Trading_System\bin\System.Linq.Dynamic.dll
 D:\Final_Project\E_Trading_System\bin\System.Net.Http.Formatting.dll
 D:\Final_Project\E_Trading_System\bin\System.Web.Helpers.dll
 D:\Final_Project\E_Trading_System\bin\System.Web.Http.dll
@@ -69,6 +71,7 @@ D:\Final_Project\E_Trading_System\bin\System.Web.WebPages.Razor.dll
 D:\Final_Project\E_Trading_System\bin\WebGrease.dll
 D:\Final_Project\E_Trading_System\bin\EntityFramework.xml
 D:\Final_Project\E_Trading_System\bin\EntityFramework.SqlServer.xml
+D:\Final_Project\E_Trading_System\bin\System.Linq.Dynamic.xml
 D:\Final_Project\E_Trading_System\bin\Newtonsoft.Json.xml
 D:\Final_Project\E_Trading_System\bin\System.Net.Http.Formatting.xml
 D:\Final_Project\E_Trading_System\bin\System.Web.Helpers.xml
@@ -82,8 +85,7 @@ D:\Final_Project\E_Trading_System\bin\System.Web.WebPages.Deployment.xml
 D:\Final_Project\E_Trading_System\bin\System.Web.WebPages.Razor.xml
 D:\Final_Project\E_Trading_System\bin\Antlr3.Runtime.pdb
 D:\Final_Project\E_Trading_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.csproj.AssemblyReference.cache
-D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.csproj.CoreCompileInputs.cache
 D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.csproj.CopyComplete
 D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.dll
 D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.pdb
+D:\Final_Project\E_Trading_System\obj\Debug\E_Trading_System.csproj.AssemblyReference.cache

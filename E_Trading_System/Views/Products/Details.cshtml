@@ -1,7 +1,10 @@
-﻿@model E_Trading_System.Models.Product
+﻿
+
+@model E_Trading_System.Models.Product
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
 }
 
 <h2>Details</h2>
@@ -26,7 +29,13 @@
             @Html.DisplayFor(model => model.Brand)
         </dd>
 
-        
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Price)
@@ -52,20 +61,20 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.ImageFileName)
+        <dt>
+            @Html.DisplayNameFor(model => model.imageurl)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageFileName)
-        </dd>*@
+            @Html.DisplayFor(model => model.imageurl)
+        </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.isdeleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.isdeleted)
         </dd>*@
 
         <dt>

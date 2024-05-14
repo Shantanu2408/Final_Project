@@ -1,0 +1,19 @@
+﻿
+<h2>Search</h2>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Search Customers</h2>
+
+@using (Html.BeginForm("Search", "ACustomer", FormMethod.Get))
+{
+    <div class="input-group mb-3">
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Enter customer name" })
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+}

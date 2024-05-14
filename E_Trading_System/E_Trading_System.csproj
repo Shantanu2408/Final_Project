@@ -55,6 +55,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.1.33.0, Culture=neutral, PublicKeyToken=b72be0322d1b32a8, processorArchitecture=MSIL">
+      <HintPath>packages\AK.System.Linq.Dynamic.1.1.33\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -164,58 +167,73 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Contact\ContactUsController.cs" />
     <Compile Include="Controllers\E_KartTrading\Admin\ACustomerController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Admin\ADashboardController.cs" />
     <Compile Include="Controllers\E_KartTrading\Admin\AdminLoginController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Admin\AVendorController.cs" />
     <Compile Include="Controllers\E_KartTrading\Customers\CustomerLoginController.cs" />
-    <Compile Include="Controllers\E_KartTrading\Vendor\ProductsController.cs" />
-    <Compile Include="Controllers\E_KartTrading\Vendor\VendorLoginController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Customers\CustomersController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Customers\EProductDataController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Customers\FProductDataController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Customers\MTProductDataController.cs" />
+    <Compile Include="Controllers\E_KartTrading\Customers\ProductDataController.cs" />
+    <Compile Include="Controllers\E_KartTrading\VendorFun\ProductsController.cs" />
+    <Compile Include="Controllers\E_KartTrading\VendorFun\VendorLoginController.cs" />
+    <Compile Include="Controllers\E_KartTrading\VendorFun\VendorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BucketList.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EKartSystem.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKartSystem.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EKartSystem.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKartSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EKartSystem.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKartSystem.edmx</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hint.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order_Cancellation.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order_Details.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Query.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vendor.cs">
-      <DependentUpon>EKartSystem.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Wallet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebGridExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -226,15 +244,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\EKartSystem.Context.tt">
+    <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EKartSystem.edmx</DependentUpon>
-      <LastGenOutput>EKartSystem.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EKartSystem.tt">
+    <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EKartSystem.edmx</DependentUpon>
-      <LastGenOutput>EKartSystem.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -257,12 +275,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\EKartSystem.edmx">
+    <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EKartSystem.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EKartSystem.edmx.diagram">
-      <DependentUpon>EKartSystem.edmx</DependentUpon>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -291,15 +309,39 @@
     <Content Include="Views\ACustomer\Index.cshtml" />
     <Content Include="Views\ACustomer\Details.cshtml" />
     <Content Include="Views\ACustomer\Delete.cshtml" />
+    <Content Include="Views\ACustomer\Search.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Shared\VendorLayout.cshtml" />
+    <Content Include="Views\ADashboard\Index.cshtml" />
+    <Content Include="Views\AVendor\Details.cshtml" />
+    <Content Include="Views\AVendor\Delete.cshtml" />
+    <Content Include="Views\AVendor\DeleteConfirmed.cshtml" />
+    <Content Include="Views\AVendor\Index.cshtml" />
+    <Content Include="Views\ProductData\Index.cshtml" />
+    <Content Include="Views\MTProductData\Index.cshtml" />
+    <Content Include="Views\FProductData\Index.cshtml" />
+    <Content Include="Views\EProductData\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Vendors\Create.cshtml" />
+    <Content Include="Views\Vendors\Delete.cshtml" />
+    <Content Include="Views\Vendors\Details.cshtml" />
+    <Content Include="Views\Vendors\Edit.cshtml" />
+    <Content Include="Views\Vendors\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+    <Content Include="Views\Shared\_VendorLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\E_KartTrading\CProducts\" />
     <Folder Include="Images\" />
+    <Folder Include="Views\GProductData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

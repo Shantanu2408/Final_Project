@@ -12,16 +12,22 @@ namespace E_Trading_System.Controllers.E_KartTrading.Admin
 {
     public class ACustomerController : Controller
     {
-        private readonly E_Trading_SystemDBEntities3 db;
+        private readonly E_Trading_SystemDBEntities4 db;
         public ACustomerController()
         {
-            db = new E_Trading_SystemDBEntities3();
+            db = new E_Trading_SystemDBEntities4();
         }
 
         public ActionResult Index()
         {
             var customers = db.Customers.Include(c => c.Hint);
             return View(customers.ToList());
+        }
+        public ActionResult GetCustomerByCustomerName(string customerName)
+        {
+            var vendors = db.Customers.Where(v => v.Customer_Name == customerName).ToList();
+
+            return View("Index", vendors);
         }
         public ActionResult Details(decimal id)
         {
@@ -36,8 +42,7 @@ namespace E_Trading_System.Controllers.E_KartTrading.Admin
             }
             return View(customer);
         }
-
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(decimal? id)
         {
             if (id == null)
             {
@@ -56,10 +61,22 @@ namespace E_Trading_System.Controllers.E_KartTrading.Admin
         public ActionResult DeleteConfirmed(decimal id)
         {
             Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (customer != null)
+            {
+                if (customer.Status != "deleted")
+                {
+                    customer.Status = "deleted";
+                    db.SaveChanges();
+                }
+                else
+                {
+                    customer.Status = "Active";
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -69,5 +86,24 @@ namespace E_Trading_System.Controllers.E_KartTrading.Admin
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Search(string searchUser)
+        {
+            // Ensure search string is not null or empty
+            if (string.IsNullOrWhiteSpace(searchUser))
+            {
+                // Redirect to Index if search string is empty
+                return RedirectToAction("Index");
+            }
+
+            // Retrieve customers based on search criteria
+            var customers = db.Customers
+                .Include(c => c.Hint)
+                .Where(c => c.Customer_Name.Contains(searchUser)); // Modify based on your search criteria
+
+            // Pass the filtered customers to the view
+            return View("Index", customers.ToList());
+        }
+
     }
 }

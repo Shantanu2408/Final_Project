@@ -1,7 +1,9 @@
 ﻿@model E_Trading_System.Models.Product
 
+
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
 }
 
 <h2>Create</h2>
@@ -23,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vendor_Id, "Vendor_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Vendor_Id, "Vendor_Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Vendor_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Vendor_Id, "", new { @class = "text-danger" })
@@ -47,11 +49,11 @@
         </div>
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @*<div class="col-md-10">
+            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
-            </div>*@
+            </div>
         </div>
 
         <div class="form-group">
@@ -78,13 +80,13 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.ImageFileName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.imageurl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ImageFileName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImageFileName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.imageurl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.imageurl, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.isdeleted, htmlAttributes: new { @class = "control-label col-md-2" })
